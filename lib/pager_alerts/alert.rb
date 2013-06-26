@@ -7,6 +7,7 @@ module PagerAlerts
 
     def alert!
       Alerts::IRC.new(subject).notify!
+      Alerts::BuildLight.new(subject).disco!
       Alerts::Audio.new(subject).play!
     end
 
