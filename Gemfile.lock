@@ -1,0 +1,30 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    awesome_print (1.1.0)
+    coderay (1.0.9)
+    daemons (1.1.9)
+    gmail_xoauth (0.4.1)
+      oauth (>= 0.3.6)
+    hashie (2.0.2)
+    method_source (0.8.1)
+    mime-types (1.23)
+    oauth (0.4.7)
+    pry (0.9.12.2)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.4)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
+    slop (3.4.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  awesome_print
+  daemons
+  gmail_xoauth
+  hashie
+  pry
+  rest-client

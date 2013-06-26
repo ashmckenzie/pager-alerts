@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+current_dir = File.expand_path(File.join('..', '..'), __FILE__)
+lib_dir = File.join(current_dir, 'lib')
+$LOAD_PATH.unshift lib_dir
+
+require 'pager_alerts'
+require 'pager_alerts/config'
+require 'pager_alerts/logger'
+require 'pager_alerts/alert'
+require 'pager_alerts/alerts/base'
+require 'pager_alerts/alerts/irc'
+require 'pager_alerts/alerts/audio'
+require 'pager_alerts/google_api'
+require 'pager_alerts/imap'
+require 'pager_alerts/check'
+
+# require 'pry'
+# require 'awesome_print'
+
+require 'daemons'
+
+options = {
+  app_name: 'pager-alerts',
+  log_output: true,
+  dir: "log/"
+}
+
+Daemons.daemonize(options)
+
+PagerAlerts::Check.new.process
