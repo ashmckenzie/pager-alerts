@@ -6,7 +6,6 @@ module PagerAlerts
     end
 
     def alert!
-      Logger.info "Alert: #{subject}"
       Alerts::IRC.new(subject).notify!
       Alerts::Audio.new(subject).play!
     end

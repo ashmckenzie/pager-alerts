@@ -18,6 +18,10 @@ module PagerAlerts
 
     private
 
+    def alert_settings
+      @alert_settings ||= Config.settings.alerts
+    end
+
     def settings
       @settings ||= Config.settings.imap
     end
@@ -29,7 +33,9 @@ module PagerAlerts
     def process_envelope message_id
       new_imap_connection do |connection|
         connection.fetch(message_id, 'ENVELOPE').each do |envelope|
-          Alert.new(envelope.attr['ENVELOPE'].subject).alert!
+          subject = envelope.attr['ENVELOPE'].subject
+          Logger.info "Alert: #{subject}"
+          Alert.new(subject).alert! if alert_settings.enabled
         end
       end
     end
