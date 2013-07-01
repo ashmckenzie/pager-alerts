@@ -7,12 +7,16 @@ module PagerAlerts
     def process
       Net::IMAP.debug = settings.debug
 
-      imap_connection.idle do |resp|
-        if resp.kind_of?(Net::IMAP::UntaggedResponse) and resp.name == "EXISTS"
-          process_envelope(resp.data)
+      begin
+        imap_connection.idle do |resp|
+          if resp.kind_of?(Net::IMAP::UntaggedResponse) and resp.name == "EXISTS"
+            process_envelope(resp.data)
+          end
+          Logger.info 'Idle..'
         end
-
-        Logger.info 'Idle..'
+      rescue Net::IMAP::Error => e
+        # Re-connect
+        self.new.process
       end
     end
 
