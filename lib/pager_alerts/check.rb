@@ -16,7 +16,8 @@ module PagerAlerts
         end
       rescue Net::IMAP::Error => e
         # Re-connect
-        self.new.process
+        Logger.info 'Attempting to reconnect..'
+        self.class.new.process
       end
     end
 
