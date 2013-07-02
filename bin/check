@@ -19,14 +19,16 @@ require 'pager_alerts/check'
 # require 'pry'
 # require 'awesome_print'
 
-require 'daemons'
+if PagerAlerts::Config.settings.general.background
+  require 'daemons'
 
-options = {
-  app_name: 'pager-alerts',
-  log_output: true,
-  dir: "log/"
-}
+  options = {
+    app_name: 'pager-alerts',
+    log_output: true,
+    dir: "log/"
+  }
 
-Daemons.daemonize(options)
+  Daemons.daemonize(options)
+end
 
 PagerAlerts::Check.new.process
