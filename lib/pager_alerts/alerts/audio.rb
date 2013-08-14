@@ -9,7 +9,7 @@ module PagerAlerts
       private
 
       def file
-        File.expand_path('../../../sounds/pager-alert.mp3', __FILE__)
+        File.expand_path('../../../../sounds/pager-alert.mp3', __FILE__)
       end
     end
   end

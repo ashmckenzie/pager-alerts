@@ -1,2 +1,3 @@
 config/config.yml
 log/*
+.DS_Store

@@ -6,9 +6,23 @@ module PagerAlerts
     end
 
     def alert!
-      Alerts::IRC.new(subject).notify! if alert_settings.irc
-      Alerts::BuildLight.new(subject).disco! if alert_settings.build_light
-      Alerts::Audio.new(subject).play! if alert_settings.audio
+      begin
+        Alerts::IRC.new(subject).notify! if alert_settings.irc
+      rescue
+        # AWWww yeah!
+      end
+
+      begin
+        Alerts::BuildLight.new(subject).disco! if alert_settings.build_light
+      rescue
+        # AWWww yeah!
+      end
+
+      begin
+        Alerts::Audio.new(subject).play! if alert_settings.audio
+      rescue
+        # AWWww yeah!
+      end
     end
 
     private
